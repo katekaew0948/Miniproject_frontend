@@ -5,7 +5,7 @@
       color="#F0CF6D"
       light
     >
-      <div class="d-flex align-center">
+      <div class="d-flex align-center red--text font-weight-bold">
         COMART
       </div>
 
@@ -29,11 +29,17 @@
         text
         @click="goToLogin()"
       >
-        เข้าสู่ระบบ
+        LOG IN
+      </v-btn>
+      <v-btn
+        text
+        @click="logout()"
+      >
+        LOG OUT
       </v-btn>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="fill-height">
       <router-view/>
     </v-main>
   </v-app>
@@ -45,7 +51,7 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
+    accId: 0,
   }),
 
   methods : {
@@ -61,8 +67,30 @@ export default {
       this.$router.push( {path: '/'} ).catch(() => {})
     },
     goToContent(){
-      this.$router.push( {path: '/content'} ).catch(() => {})
+      if(localStorage.getItem("loginStatus") == 'true'){
+        this.accId = localStorage.getItem("accId")
+        console.log(this.accId)
+        this.$router.push( {path: '/content/' + this.accId }).catch(() => {})
+      }
+      else{
+        this.$router.push({path: '/login'}).catch(() => {})
+      }
+    },
+    logout(){
+      localStorage.setItem("username", '');
+      localStorage.setItem("loginStatus" , false);
+      localStorage.setItem("accId", 0);
+
+      this.$router.push( {path: '/'} ).catch(() => {})
     }
   }
 }
 </script>
+<style scoped>
+.fill-height{
+    background-image: url("@/assets/starry_sky.jpg");
+    background-repeat: no-repeat;
+    background: cover;
+    background-size: cover;
+  }
+</style>

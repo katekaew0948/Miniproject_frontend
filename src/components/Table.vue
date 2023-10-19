@@ -300,6 +300,7 @@ export default {
           }
 
         } else {
+          //edit item
           //  Object.assign(this.desserts[this.editedIndex] , this.editedItem)
            var data = {
             firstName: this.firstName,

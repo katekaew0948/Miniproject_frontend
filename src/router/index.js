@@ -29,12 +29,12 @@ const routes = [
     component: () => import('../views/TableView.vue')
   },
   {
-    path: '/artist',
+    path: '/artist/:artistId',
     name: 'artist',
     component: () => import('../views/ArtistView.vue')
   },
   {
-    path: '/content',
+    path: '/content/:accId',
     name: 'content',
     component: () => import('../views/ContentView.vue')
   }
